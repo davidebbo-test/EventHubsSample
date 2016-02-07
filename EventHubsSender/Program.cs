@@ -9,7 +9,7 @@ namespace EventHubsSender
     class Program
     {
         static string eventHubName = ConfigurationManager.AppSettings["eventHubName"];
-        static string connectionString = ConfigurationManager.AppSettings["eventHubConnectionString"];
+        static string connectionString = ConfigurationManager.AppSettings["eventHubSendRuleConnectionString"];
 
         static void Main(string[] args)
         {

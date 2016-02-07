@@ -8,7 +8,7 @@ namespace EventHubsReceiver
     {
         static void Main(string[] args)
         {
-            string eventHubConnectionString = ConfigurationManager.AppSettings["eventHubConnectionString"];
+            string eventHubConnectionString = ConfigurationManager.AppSettings["eventHubReceiveRuleConnectionString"];
             string eventHubName = ConfigurationManager.AppSettings["eventHubName"];
             string storageAccountName = ConfigurationManager.AppSettings["storageAccountName"];
             string storageAccountKey = ConfigurationManager.AppSettings["storageAccountKey"];
