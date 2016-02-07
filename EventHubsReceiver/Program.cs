@@ -16,12 +16,20 @@ namespace EventHubsReceiver
 
             string eventProcessorHostName = Guid.NewGuid().ToString();
             EventProcessorHost eventProcessorHost = new EventProcessorHost(eventProcessorHostName, eventHubName, EventHubConsumerGroup.DefaultGroupName, eventHubConnectionString, storageConnectionString);
+
             Console.WriteLine("Registering EventProcessor...");
-            eventProcessorHost.RegisterEventProcessorAsync<SimpleEventProcessor>().Wait();
+            var options = new EventProcessorOptions();
+            options.ExceptionReceived += OptionsOnExceptionReceived;
+            eventProcessorHost.RegisterEventProcessorAsync<SimpleEventProcessor>(options).Wait();
 
             Console.WriteLine("Receiving. Press enter key to stop worker.");
             Console.ReadLine();
             eventProcessorHost.UnregisterEventProcessorAsync().Wait();
+        }
+
+        private static void OptionsOnExceptionReceived(object sender, ExceptionReceivedEventArgs e)
+        {
+            Console.WriteLine(e.Exception);
         }
     }
 }
