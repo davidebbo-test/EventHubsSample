@@ -19,17 +19,12 @@ namespace EventHubsReceiver
 
             Console.WriteLine("Registering EventProcessor...");
             var options = new EventProcessorOptions();
-            options.ExceptionReceived += OptionsOnExceptionReceived;
+            options.ExceptionReceived += (sender, e) => { Console.WriteLine(e.Exception); };
             eventProcessorHost.RegisterEventProcessorAsync<SimpleEventProcessor>(options).Wait();
 
             Console.WriteLine("Receiving. Press enter key to stop worker.");
             Console.ReadLine();
             eventProcessorHost.UnregisterEventProcessorAsync().Wait();
-        }
-
-        private static void OptionsOnExceptionReceived(object sender, ExceptionReceivedEventArgs e)
-        {
-            Console.WriteLine(e.Exception);
         }
     }
 }
