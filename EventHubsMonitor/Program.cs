@@ -43,7 +43,7 @@ namespace EventHubsMonitor
 
                 for (int i = 0; i < runtimeInfo.PartitionCount; i++)
                 {
-                    PartitionRuntimeInformation part = tasks[i].Result;
+                    PartitionRuntimeInformation part = tasks[i].GetAwaiter().GetResult();
                     Console.WriteLine($"BeginSequenceNumber: {part.BeginSequenceNumber}, LastEnqueuedOffset: {part.LastEnqueuedOffset}, LastEnqueuedSequenceNumber: {part.LastEnqueuedSequenceNumber}, LastEnqueuedTime: {part.LastEnqueuedTimeUtc}");
 
                     if (sequenceNumbers[i] != 0)
