@@ -24,7 +24,6 @@ namespace EventHubsMonitor
 
         static async Task MonitorEventHub()
         {
-            EventHubConsumerGroup consumerGroup = _client.GetDefaultConsumerGroup();
             EventHubRuntimeInformation runtimeInfo = await _client.GetRuntimeInformationAsync();
             Console.WriteLine($"Partition count: {runtimeInfo.PartitionCount}");
 
